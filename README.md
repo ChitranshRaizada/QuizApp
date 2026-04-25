@@ -63,3 +63,4 @@ The app follows an **Immersive Technical** aesthetic:
 - Bold, capitalized typography (Inter font).
 - Purposeful micro-animations to guide user attention.
 - Clean, data-driven visualizations for results.
+![App Screenshot](./public/screenshot.png)
