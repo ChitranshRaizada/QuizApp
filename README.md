@@ -16,7 +16,6 @@ Quiz Blast is a high-octane, real-time multiplayer quiz application inspired by 
 - **Styling**: Tailwind CSS (Utility-first styling with custom immersive theme)
 - **Animations**: Framer Motion (Smooth transitions and UI feedback)
 - **Backend/Database**: Firebase Firestore (Real-time data synchronization)
-- **Authentication**: Firebase Auth (Google Provider)
 - **Icons**: Lucide React
 
 ## 🚀 Getting Started
@@ -63,4 +62,3 @@ The app follows an **Immersive Technical** aesthetic:
 - Bold, capitalized typography (Inter font).
 - Purposeful micro-animations to guide user attention.
 - Clean, data-driven visualizations for results.
-![App Screenshot](./public/screenshot.png)
