@@ -4,7 +4,6 @@ Quiz Blast is a high-octane, real-time multiplayer quiz application inspired by 
 
 ## ✨ Key Features
 
-- **Google Authentication**: Players and admins sign in securely via Google to maintain profile integrity and scores.
 - **Real-Time Host Control**: Admins can import questions, start rounds, reveal answers, and advance to the next question in real-time.
 - **Dynamic Leaderboards**: Live standings are visible to players, showing the top participants in the current session.
 - **Interactive Player Experience**: Players receive instant feedback on their performance, including speed bonuses for quick correct answers.
