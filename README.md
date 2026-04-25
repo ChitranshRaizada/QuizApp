@@ -18,7 +18,6 @@ Quiz Blast is a high-octane, real-time multiplayer quiz application inspired by 
 - **Backend/Database**: Firebase Firestore (Real-time data synchronization)
 - **Authentication**: Firebase Auth (Google Provider)
 - **Icons**: Lucide React
-- **QR Codes**: qrcode.react (For easy session sharing)
 
 ## 🚀 Getting Started
 
@@ -55,6 +54,7 @@ The application implements strict Firestore Security Rules, ensuring:
 - Only the session creator (admin) can update quiz state.
 - Players can only create/update their own participation records.
 - Admins can update player scores during the "reveal" phase to maintain scoring authority.
+- Admin Password for test run is 1234
 
 ## 🎨 Design Philosophy
 
