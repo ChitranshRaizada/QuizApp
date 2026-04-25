@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Global Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Sessions Collection
+    match /sessions/{sessionId} {
+      function isValidSession(data) {
+        return data.status in ['idle', 'active', 'revealed', 'ended']
+          && (data.activeQuestionIndex == null || data.activeQuestionIndex is number)
+          && data.questions is list;
+      }
+
+      function isAdmin(data) {
+        return isSignedIn() && data.adminUid == request.auth.uid;
+      }
+
+      // Read: Anyone signed in can read sessions to join
+      allow read: if isSignedIn();
+      
+      // Create: Anyone signed in can create a session (they become admin)
+      allow create: if isSignedIn() 
+        && isValidId(sessionId)
+        && isValidSession(request.resource.data)
+        && request.resource.data.adminUid == request.auth.uid;
+
+      // Update: Only the adminUid can update the session
+      allow update: if isSignedIn()
+        && isAdmin(resource.data)
+        && isValidSession(request.resource.data)
+        // Ensure adminUid cannot be changed
+        && request.resource.data.adminUid == resource.data.adminUid;
+        
+      // Sub-collection for players
+      match /players/{playerId} {
+        function isValidPlayer(data) {
+          return data.username is string && data.username.size() <= 50
+            && data.score is number
+            && data.uid == request.auth.uid;
+        }
+
+        // Allow reading players if you are part of the session
+        allow read: if isSignedIn();
+        
+        // Create player: Must use your own UID
+        allow create: if isSignedIn()
+          && playerId == request.auth.uid
+          && isValidPlayer(request.resource.data);
+
+        // Update player: Only the owner OR the session admin can update (for scoring)
+        allow update: if isSignedIn()
+          && (
+               (resource.data.uid == request.auth.uid && isValidPlayer(request.resource.data))
+               || 
+               (get(/databases/$(database)/documents/sessions/$(sessionId)).data.adminUid == request.auth.uid)
+             );
+      }
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId);
+    }
+  }
+}

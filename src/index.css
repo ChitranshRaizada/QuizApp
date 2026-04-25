@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #050505;
+  --color-brand-surface: #0f172a; /* slate-900 */
+  --color-brand-border: #1e293b; /* slate-800 */
+  --color-brand-accent: #4f46e5; /* indigo-600 */
+  --shadow-brand-glow: 0 0 15px rgba(79, 70, 229, 0.4);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-slate-100 font-sans antialiased;
+  }
+}
+
+.immersive-card {
+  @apply bg-[#0f172a] border border-slate-800 rounded-3xl shadow-2xl overflow-hidden;
+}
+
+.immersive-glow {
+  @apply shadow-[0_0_20px_rgba(79,70,229,0.2)];
+}
+
+.immersive-btn-primary {
+  @apply bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-2xl shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all active:scale-95;
+}
+
+.immersive-btn-secondary {
+  @apply bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-6 rounded-2xl border border-slate-700 transition-all active:scale-95;
+}

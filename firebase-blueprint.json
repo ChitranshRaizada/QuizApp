@@ -1,0 +1,66 @@
+{
+  "entities": {
+    "QuizSession": {
+      "title": "Quiz Session",
+      "description": "State and metadata for an active quiz session.",
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "enum": ["idle", "active", "revealed", "ended"] },
+        "activeQuestionIndex": { "type": "number" },
+        "startTime": { "type": "number" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "options": { "type": "array", "items": { "type": "string" } },
+              "correctAnswer": { "type": "number" },
+              "timeLimit": { "type": "number" }
+            }
+          }
+        }
+      },
+      "required": ["status", "activeQuestionIndex", "questions"]
+    },
+    "Player": {
+      "title": "Player",
+      "description": "Represents a student or participant in a quiz session.",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "score": { "type": "number" },
+        "lastAnswer": { "type": "number" },
+        "lastAnswerTime": { "type": "number" },
+        "isCorrect": { "type": "boolean" },
+        "uid": { "type": "string" }
+      },
+      "required": ["username", "score", "uid"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Basic user profile information.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/sessions/{sessionId}": {
+      "schema": "QuizSession",
+      "description": "Active quiz session data."
+    },
+    "/sessions/{sessionId}/players/{playerId}": {
+      "schema": "Player",
+      "description": "Players participating in a specific session."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private user profiles."
+    }
+  }
+}

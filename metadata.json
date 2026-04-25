@@ -1,0 +1,6 @@
+{
+  "name": "QuizBlast Real-Time Quiz",
+  "description": "A real-time multiplayer quiz application with admin controls, live leaderboard, and tab-syncing using BroadcastChannel API.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
