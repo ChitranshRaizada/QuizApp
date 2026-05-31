@@ -14,7 +14,7 @@ Quiz Blast is a high-octane, real-time multiplayer quiz application inspired by 
 
 - **Frontend**: React (Functional Components, Hooks) also python
 - **Styling**: Tailwind CSS (Utility-first styling with custom immersive theme)
-- **Animations**: Framer Motion (Smooth transitions and UI feedback)
+- **Animations**: Framer Motion (Smooth transitions and UI feedback) and specialization
 - **Backend/Database**: Firebase Firestore (Real-time data synchronization)
 - **Icons**: Lucide React
 
